@@ -3,7 +3,7 @@
     "semi": false,
     "useTabs": true,
     "tabWidth": 4,
-    "singleQuote": false,
+    "singleQuote": true,
     "jsxSingleQuote": false,
     "printWidth": 100
 }

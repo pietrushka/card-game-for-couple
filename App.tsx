@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react'
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
+import { Stack, useRouter } from 'expo-router'
+import Home from './src/components/Home'
+import { Player } from './types'
+import { PlayersProvider } from './src/context/DataContext'
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	const router = useRouter()
+	return (
+		<SafeAreaView style={styles.container}>
+			<PlayersProvider>
+				{/* <Stack.Screen
+          options={{
+            headerStyle: { backgroundColor: '#fff' },
+            headerTitle: 'Card Challenges',
+          }}
+        /> */}
+				<ScrollView showsVerticalScrollIndicator={false}>
+					<View style={styles.view}>
+						<Home {...{ players, setPlayers }} />
+					</View>
+				</ScrollView>
+			</PlayersProvider>
+		</SafeAreaView>
+	)
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+	},
+	view: {
+		flex: 1,
+		padding: 10,
+	},
+})
