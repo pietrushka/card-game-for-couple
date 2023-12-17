@@ -1,14 +1,16 @@
 import React from 'react'
-import { Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
+import { usePlayers } from '../context/PlayersContext'
+import PlayersList from './PlayerList'
+import AddPlayer from './AddPlayerForm'
 
 const Home: React.FC = () => {
+	const { players, addPlayer, deletePlayer } = usePlayers()
 	return (
 		<>
 			<Text>Welcome</Text>
-			<TextInput style={styles.input} placeholder="Player Name" />
-			<TouchableOpacity>
-				<Text>Add +</Text>
-			</TouchableOpacity>
+			<AddPlayer addPlayer={addPlayer} />
+			<PlayersList {...{ players, deletePlayer }} />
 		</>
 	)
 }

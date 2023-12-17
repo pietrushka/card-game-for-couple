@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native'
 import { Stack, useRouter } from 'expo-router'
 import Home from './src/components/Home'
 import { Player } from './types'
-import { PlayersProvider } from './src/context/DataContext'
+import { PlayersProvider } from './src/context/PlayersContext'
 
 export default function App() {
 	const router = useRouter()
@@ -18,7 +18,7 @@ export default function App() {
         /> */}
 				<ScrollView showsVerticalScrollIndicator={false}>
 					<View style={styles.view}>
-						<Home {...{ players, setPlayers }} />
+						<Home />
 					</View>
 				</ScrollView>
 			</PlayersProvider>
