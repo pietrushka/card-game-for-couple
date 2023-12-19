@@ -1,4 +1,4 @@
-import { Player } from '../../types'
+import { Player } from '../types'
 import { Text, TouchableOpacity } from 'react-native'
 
 const PlayersList: React.FC<{ players: Player[]; deletePlayer: (id: string) => void }> = ({

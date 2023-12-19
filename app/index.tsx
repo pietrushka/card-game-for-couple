@@ -1,17 +1,17 @@
 import React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { usePlayers } from '../context/PlayersContext'
-import PlayersList from './PlayerList'
-import AddPlayer from './AddPlayerForm'
+import PlayersList from '../components/PlayerList'
+import AddPlayer from '../components/AddPlayerForm'
 
-const Home: React.FC = () => {
+export default function Home() {
 	const { players, addPlayer, deletePlayer } = usePlayers()
 	return (
-		<>
+		<View>
 			<Text>Welcome</Text>
 			<AddPlayer addPlayer={addPlayer} />
 			<PlayersList {...{ players, deletePlayer }} />
-		</>
+		</View>
 	)
 }
 
@@ -24,5 +24,3 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 	},
 })
-
-export default Home
