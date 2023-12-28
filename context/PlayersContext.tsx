@@ -1,6 +1,6 @@
 import React from 'react'
-import { Player } from '../types'
-import nanoid  from '../utils/nanoid'
+import { Player } from '@/types'
+import nanoid  from '@/utils/nanoid'
 
 type PlayersContextType = {
 	players: Player[]

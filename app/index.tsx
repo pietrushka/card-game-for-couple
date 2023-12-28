@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { usePlayers } from '../context/PlayersContext'
-import PlayersList from '../components/PlayerList'
-import AddPlayer from '../components/AddPlayerForm'
+import { usePlayers } from '@/context/PlayersContext'
+import PlayersList from '@/components/PlayerList'
+import AddPlayer from '@/components/AddPlayerForm'
 
 export default function Home() {
 	const { players, addPlayer, deletePlayer } = usePlayers()
