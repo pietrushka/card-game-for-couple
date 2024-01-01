@@ -3,3 +3,10 @@ export type Player = {
 	name: string
 	gender: 'male' | 'female'
 }
+
+export type Category = {
+	id: string
+	label: string
+	isSelected: boolean
+}
+

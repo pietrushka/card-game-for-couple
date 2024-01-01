@@ -3,6 +3,7 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { PlayersProvider } from '@/context/PlayersContext'
+import { CardsProvider } from '@/context/CardsContext'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export {
@@ -35,9 +36,11 @@ export default function RootLayout() {
 
   return (
     <PlayersProvider>
-      <SafeAreaView edges={['bottom']} style={{ flex: 1 }}>
-        <Stack />
-      </SafeAreaView>
+      <CardsProvider>
+        <SafeAreaView edges={['bottom']} style={{ flex: 1 }}>
+          <Stack />
+        </SafeAreaView>
+      </CardsProvider>
     </PlayersProvider >
   );
 }
