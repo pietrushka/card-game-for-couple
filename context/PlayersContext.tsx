@@ -1,28 +1,36 @@
 import React from 'react'
 import { Player } from '@/types'
-import nanoid  from '@/utils/nanoid'
 
 type PlayersContextType = {
 	players: Player[]
-	addPlayer: (name: string) => void
-	deletePlayer: (name: string) => void
+	modifyPlayer: (data: Player) => void
 }
 
 export const PlayersContext = React.createContext<PlayersContextType | null>(null)
 
 export const PlayersProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const [players, setPlayers] = React.useState<Player[]>([])
+	const [players, setPlayers] = React.useState<Player[]>([
+		{
+			id: 'player1',
+			name: 'Player 1',
+			gender: 'male',
+		},
+		{
+			id: 'player2',
+			name: 'Player 2',
+			gender: 'female',
+		}
+	])
 
-	const addPlayer = async (name: string) => {
-		setPlayers([...players, { name, id: nanoid() }])
+	const modifyPlayer = async (data: Player) => {
+		setPlayers(players.map(
+			player => player.id === data.id ? data : player
+		))
 	}
 
-	const deletePlayer = async (id: string) => {
-		setPlayers(players.filter((player) => player.id !== id))
-	}
 
 	return (
-		<PlayersContext.Provider value={{ players, addPlayer, deletePlayer }}>
+		<PlayersContext.Provider value={{ players, modifyPlayer }}>
 			{children}
 		</PlayersContext.Provider>
 	)

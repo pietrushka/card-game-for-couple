@@ -1,26 +1,37 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text, } from 'react-native'
 import { usePlayers } from '@/context/PlayersContext'
-import PlayersList from '@/components/PlayerList'
-import AddPlayer from '@/components/AddPlayerForm'
+import PlayerInput from '@/components/PlayerInput'
+import { Link, } from "expo-router";
+import AppStyles from '@/AppStyles'
+import ActionButton from '@/components/ActionButton';
 
 export default function Home() {
-	const { players, addPlayer, deletePlayer } = usePlayers()
+	const { players, modifyPlayer } = usePlayers()
+	const [player1, player2] = players
 	return (
-		<View>
-			<Text>Welcome</Text>
-			<AddPlayer addPlayer={addPlayer} />
-			<PlayersList {...{ players, deletePlayer }} />
+		<View style={AppStyles.screen}>
+			<View style={styles.playersForm}>
+				<Text style={AppStyles.header}>Fill yours and your partner names and genders</Text>
+				<View style={styles.inputGroup}>
+					<PlayerInput player={player1} modifyPlayer={modifyPlayer} />
+					<PlayerInput player={player2} modifyPlayer={modifyPlayer} />
+				</View>
+			</View>
+			<Link href="/categories" asChild>
+				<ActionButton text='Choose Categories' />
+			</Link>
 		</View>
-	)
+	);
 }
 
 const styles = StyleSheet.create({
-	input: {
-		height: 40,
-		width: '80%',
-		borderColor: 'gray',
-		borderWidth: 1,
-		paddingHorizontal: 10,
+	playersForm: {
+		display: 'flex',
+		gap: 20,
+	},
+	inputGroup: {
+		display: 'flex',
+		gap: 20,
+		paddingVertical: 20,
 	},
 })
