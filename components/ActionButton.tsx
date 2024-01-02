@@ -33,12 +33,12 @@ export default class ActionButton extends React.Component<ActionButtonProps> {
         const buttonStyles = {
             ...styles.button,
             backgroundColor: disabled ? 'grey' : theme.backgroundColor,
-            borderColor: theme.borderColor
+            borderColor: disabled ? 'grey' : theme.borderColor
         };
 
         const buttonTextStyles = {
             ...styles.buttonText,
-            color: disabled ? 'lightgrey' : theme.textColor
+            color: disabled ? 'white' : theme.textColor
         };
 
         return (

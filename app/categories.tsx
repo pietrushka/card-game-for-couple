@@ -6,7 +6,7 @@ import ActionButton from '@/components/ActionButton';
 
 export default function Categories() {
     const { categories, toggleCategory } = useCards()
-    const isStartGameLinkDisabled = categories.length < 1
+    const isStartGameLinkDisabled = categories.filter(x => x.isSelected).length < 1
     return (
         <View style={AppStyles.screen}>
             <Text style={AppStyles.header}>You can mix categories togather</Text>
