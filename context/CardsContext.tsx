@@ -1,11 +1,13 @@
 import React from 'react'
 import { Card, Category } from '@/types'
 import categoriesJson from '@/data/categories.json'
+import cardsJson from '@/data/cards.json'
 
 type CardsContextType = {
 	cards: Card[]
 	categories: Category[]
 	toggleCategory: (category: Category) => void
+	startGame: () => void
 }
 
 const initialCategories = categoriesJson.map(x => ({ ...x, isSelected: false }))
@@ -21,9 +23,14 @@ export const CardsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 		);
 	}
 
+	const startGame = () => {
+		const filteredCards = cardsJson.filter(x => categories.some(y => x.categoryId === y.id))
+		setCards(filteredCards)
+	}
+
 
 	return (
-		<CardsContext.Provider value={{ cards, categories, toggleCategory }}>
+		<CardsContext.Provider value={{ cards, categories, toggleCategory, startGame }}>
 			{children}
 		</CardsContext.Provider>
 	)

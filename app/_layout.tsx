@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { PlayersProvider } from '@/context/PlayersContext'
 import { CardsProvider } from '@/context/CardsContext'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -38,7 +39,9 @@ export default function RootLayout() {
     <PlayersProvider>
       <CardsProvider>
         <SafeAreaView edges={['bottom']} style={{ flex: 1 }}>
-          <Stack />
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <Stack />
+          </GestureHandlerRootView>
         </SafeAreaView>
       </CardsProvider>
     </PlayersProvider >

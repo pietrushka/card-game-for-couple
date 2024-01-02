@@ -10,3 +10,7 @@ export type Category = {
 	isSelected: boolean
 }
 
+export type Card = {
+	text: string
+	categoryId: string
+}
