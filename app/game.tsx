@@ -8,6 +8,7 @@ import {
     runOnJS,
 } from 'react-native-reanimated';
 
+const MAX_VISIBLE_CARDS = 6
 
 export default function Game() {
     const { startGame, cards } = useCards()
@@ -16,11 +17,11 @@ export default function Game() {
         startGame()
     }, [])
 
-    const activeIndex = useSharedValue(0);
+    const activeIndexRef = useSharedValue(0);
     const [index, setIndex] = useState(0);
 
     useAnimatedReaction(
-        () => activeIndex.value,
+        () => activeIndexRef.value,
         (value, prevValue) => {
             if (Math.floor(value) !== index) {
                 runOnJS(setIndex)(Math.floor(value));
@@ -29,23 +30,26 @@ export default function Game() {
     );
 
     const onResponse = (res: boolean) => {
-        console.log('on Response: ', res);
     };
 
-
+    console.log('rerender')
     return (
         <View style={styles.screen}>
             {/* TODO maybe use FlatList here */}
-            {cards.map((card, index) => (
-                <Card
-                    key={card.text}
-                    text={card.text}
-                    numOfCards={cards.length}
-                    index={index}
-                    activeIndex={activeIndex}
-                    onResponse={onResponse}
-                />
-            ))}
+            {cards.map((card, cardIdx) => cardIdx - index < MAX_VISIBLE_CARDS
+                // Avoid rendering not visible cards 
+                ? (
+                    <Card
+                        key={card.text}
+                        text={card.text}
+                        numOfCards={cards.length}
+                        cardIndex={cardIdx}
+                        activeIndexRef={activeIndexRef}
+                        onResponse={onResponse}
+                        maxCardsVisible={MAX_VISIBLE_CARDS}
+                    />
+                ) : null
+            )}
         </View>
     )
 }

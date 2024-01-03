@@ -24,10 +24,10 @@ export const CardsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 	}
 
 	const startGame = () => {
-		const filteredCards = cardsJson.filter(x => categories.some(y => x.categoryId === y.id))
+		const selectedCategoryIds = categories.filter(x => x.isSelected).map(x => x.id)
+		const filteredCards = cardsJson.filter(x => selectedCategoryIds.some(y => x.categoryId === y))
 		setCards(filteredCards)
 	}
-
 
 	return (
 		<CardsContext.Provider value={{ cards, categories, toggleCategory, startGame }}>

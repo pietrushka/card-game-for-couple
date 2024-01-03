@@ -11,7 +11,6 @@ import Animated, {
 import { GestureDetector, Gesture, } from 'react-native-gesture-handler';
 
 const screenWidth = Dimensions.get('screen').width;
-const MAX_VISIBLE_CARDS = 6
 const CARD_WIDTH = screenWidth * 0.8
 const CARD_HEIGHT = CARD_WIDTH * 1.67 // golden ratio
 
@@ -19,40 +18,42 @@ const CARD_HEIGHT = CARD_WIDTH * 1.67 // golden ratio
 interface CardProps {
     text: string;
     numOfCards: number;
-    index: number;
-    activeIndex: SharedValue<number>;
+    cardIndex: number;
+    activeIndexRef: SharedValue<number>;
     onResponse: (a: boolean) => void;
+    maxCardsVisible: number
 };
 
 export default function Card({
     text,
     numOfCards,
-    index,
-    activeIndex,
+    cardIndex,
+    activeIndexRef,
     onResponse,
+    maxCardsVisible
 }: CardProps) {
     const translationX = useSharedValue(0);
 
     const animatedCard = useAnimatedStyle(() => {
         return ({
             opacity: interpolate(
-                activeIndex.value,
+                activeIndexRef.value,
                 // top one, current visible item, bottom one
-                [index - 2, index - 1, index, index + 1,],
-                [1 - 1 / (MAX_VISIBLE_CARDS - 1), 1, 1, 1,],
+                [cardIndex - 2, cardIndex - 1, cardIndex, cardIndex + 1,],
+                [1 - 1 / (maxCardsVisible - 1), 1, 1, 1,],
             ),
             transform: [
                 {
                     scale: interpolate(
-                        activeIndex.value,
-                        [index - 1, index, index + 1],
+                        activeIndexRef.value,
+                        [cardIndex - 1, cardIndex, cardIndex + 1],
                         [0.95, 1, 1]
                     ),
                 },
                 {
                     translateY: interpolate(
-                        activeIndex.value,
-                        [index - 1, index, index + 1],
+                        activeIndexRef.value,
+                        [cardIndex - 1, cardIndex, cardIndex + 1],
                         [-30, 0, 0]
                     ),
                 },
@@ -72,13 +73,12 @@ export default function Card({
 
     const gesture = Gesture.Pan()
         .onChange((event) => {
-            console.log('onChange')
             translationX.value = event.translationX;
 
-            activeIndex.value = interpolate(
+            activeIndexRef.value = interpolate(
                 Math.abs(translationX.value),
                 [0, 500],
-                [index, index + 0.8]
+                [cardIndex, cardIndex + 0.8]
             );
         })
         .onEnd((event) => {
@@ -86,7 +86,7 @@ export default function Card({
                 translationX.value = withSpring(Math.sign(event.velocityX) * 500, {
                     velocity: event.velocityX,
                 });
-                activeIndex.value = withSpring(index + 1);
+                activeIndexRef.value = withSpring(cardIndex + 1);
 
                 runOnJS(onResponse)(event.velocityX > 0);
             } else {
@@ -106,7 +106,7 @@ export default function Card({
                     styles.card,
                     animatedCard,
                     {
-                        zIndex: numOfCards - index,
+                        zIndex: numOfCards - cardIndex,
                     },
                 ]}
             >
