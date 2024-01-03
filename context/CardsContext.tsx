@@ -25,7 +25,14 @@ export const CardsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
 	const startGame = () => {
 		const selectedCategoryIds = categories.filter(x => x.isSelected).map(x => x.id)
-		const filteredCards = cardsJson.filter(x => selectedCategoryIds.some(y => x.categoryId === y))
+		let filteredCards = cardsJson.filter(x => selectedCategoryIds.some(y => x.categoryId === y));
+
+		// Shuffling the filteredCards array
+		for (let i = filteredCards.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[filteredCards[i], filteredCards[j]] = [filteredCards[j], filteredCards[i]];
+		}
+
 		setCards(filteredCards)
 	}
 

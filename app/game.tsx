@@ -32,7 +32,6 @@ export default function Game() {
     const onResponse = (res: boolean) => {
     };
 
-    console.log('rerender')
     return (
         <View style={styles.screen}>
             {/* TODO maybe use FlatList here */}
