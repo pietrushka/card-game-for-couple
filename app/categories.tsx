@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native'
 import { Link } from "expo-router";
-import { useCards } from '@/context/CardsContext';
+import { useGame } from '@/context/GameContext';
 import AppStyles from '@/AppStyles';
 import ActionButton from '@/components/ActionButton';
 
 export default function Categories() {
-    const { categories, toggleCategory } = useCards()
+    const { categories, toggleCategory } = useGame()
     const isStartGameLinkDisabled = categories.filter(x => x.isSelected).length < 1
     return (
         <View style={AppStyles.screen}>

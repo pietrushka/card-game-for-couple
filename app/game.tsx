@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { useCards } from '@/context/CardsContext'
+import { useGame } from '@/context/GameContext'
 import Card from '@/components/Card'
 import {
     useAnimatedReaction,
@@ -11,7 +11,7 @@ import {
 const MAX_VISIBLE_CARDS = 6
 
 export default function Game() {
-    const { startGame, cards } = useCards()
+    const { startGame, cards } = useGame()
 
     useEffect(() => {
         startGame()

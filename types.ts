@@ -10,7 +10,11 @@ export type Category = {
 	isSelected: boolean
 }
 
-export type Card = {
+export type Question = {
 	text: string
 	categoryId: string
+}
+
+export interface Card extends Question {
+	playerId: string
 }

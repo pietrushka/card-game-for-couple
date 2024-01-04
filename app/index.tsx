@@ -1,12 +1,12 @@
 import { View, StyleSheet, Text, } from 'react-native'
-import { usePlayers } from '@/context/PlayersContext'
+import { useGame } from '@/context/GameContext'
 import PlayerInput from '@/components/PlayerInput'
 import { Link, } from "expo-router";
 import AppStyles from '@/AppStyles'
 import ActionButton from '@/components/ActionButton';
 
 export default function Home() {
-	const { players, modifyPlayer } = usePlayers()
+	const { players, modifyPlayer } = useGame()
 	const [player1, player2] = players
 	return (
 		<View style={AppStyles.screen}>

@@ -9,6 +9,7 @@ import Animated, {
     useAnimatedReaction
 } from 'react-native-reanimated';
 import { GestureDetector, Gesture, } from 'react-native-gesture-handler';
+import { toLowerCaseFirstLetter } from '@/utils';
 
 const screenWidth = Dimensions.get('screen').width;
 const CARD_WIDTH = screenWidth * 0.8
@@ -105,12 +106,12 @@ export default function Card({
                 style={[
                     styles.card,
                     animatedCard,
-                    {
-                        zIndex: numOfCards - cardIndex,
-                    },
+                    { zIndex: numOfCards - cardIndex },
                 ]}
             >
-                <Text style={styles.cardText}>{text}</Text>
+                <Text style={styles.cardText}>
+                    <Text style={styles.playerName}>Player name</Text> {toLowerCaseFirstLetter(text)}
+                </Text>
             </Animated.View>
         </GestureDetector>
     )
@@ -135,4 +136,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: 'black',
     },
+    playerName: {
+        color: 'blue'
+    }
 });

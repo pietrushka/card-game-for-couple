@@ -2,8 +2,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
-import { PlayersProvider } from '@/context/PlayersContext'
-import { CardsProvider } from '@/context/CardsContext'
+import { GameProvider } from '@/context/GameContext'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -36,14 +35,12 @@ export default function RootLayout() {
   }
 
   return (
-    <PlayersProvider>
-      <CardsProvider>
-        <SafeAreaView edges={['bottom']} style={{ flex: 1 }}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <Stack />
-          </GestureHandlerRootView>
-        </SafeAreaView>
-      </CardsProvider>
-    </PlayersProvider >
+    <GameProvider>
+      <SafeAreaView edges={['bottom']} style={{ flex: 1 }}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Stack />
+        </GestureHandlerRootView>
+      </SafeAreaView>
+    </GameProvider >
   );
 }
