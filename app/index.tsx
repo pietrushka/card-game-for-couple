@@ -7,7 +7,7 @@ import ActionButton from '@/components/ActionButton';
 
 export default function Home() {
 	const { players, modifyPlayer } = useGame()
-	const [player1, player2] = players
+	const { player1, player2 } = players
 	return (
 		<View style={AppStyles.screen}>
 			<View style={styles.playersForm}>

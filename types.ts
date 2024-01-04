@@ -1,5 +1,7 @@
+export type PlayerId = 'player1' | 'player2'
+
 export type Player = {
-	id: string
+	id: PlayerId
 	name: string
 	gender: 'male' | 'female'
 }
@@ -16,5 +18,5 @@ export type Question = {
 }
 
 export interface Card extends Question {
-	playerId: string
+	playerId: PlayerId
 }

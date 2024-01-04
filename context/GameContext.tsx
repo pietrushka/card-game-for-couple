@@ -16,7 +16,7 @@ function convertQuestionToCards(questions: Question[]): Card[] {
 }
 
 type GameContextType = {
-    players: Player[]
+    players: PlayersState
     modifyPlayer: (data: Player) => void
     cards: Card[]
     categories: Category[]
@@ -24,30 +24,37 @@ type GameContextType = {
     startGame: () => void
 }
 
+// app is supposed to work with 2 players only 
+type PlayersState = {
+    player1: Player
+    player2: Player
+}
+
 const initialCategories = categoriesJson.map(x => ({ ...x, isSelected: false }))
 
 export const GameContext = React.createContext<GameContextType | null>(null)
 
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [players, setPlayers] = React.useState<Player[]>([
-        {
+    const [players, setPlayers] = React.useState<PlayersState>({
+        player1: {
             id: 'player1',
             name: 'Player 1',
             gender: 'male',
         },
-        {
+        player2: {
             id: 'player2',
             name: 'Player 2',
             gender: 'female',
         }
-    ])
+    })
     const [cards, setCards] = React.useState<Card[]>([])
     const [categories, setCategories] = React.useState<Category[]>(initialCategories)
 
     function modifyPlayer(data: Player) {
-        setPlayers(players.map(
-            player => player.id === data.id ? data : player
-        ))
+        setPlayers(state => ({
+            ...state,
+            [data.id]: data
+        }))
     }
 
     const toggleCategory = async (category: Category) => {
