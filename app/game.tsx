@@ -11,7 +11,7 @@ import {
 const MAX_VISIBLE_CARDS = 6
 
 export default function Game() {
-    const { startGame, cards } = useGame()
+    const { startGame, cards, players } = useGame()
 
     useEffect(() => {
         startGame()
@@ -46,6 +46,7 @@ export default function Game() {
                         activeIndexRef={activeIndexRef}
                         onResponse={onResponse}
                         maxCardsVisible={MAX_VISIBLE_CARDS}
+                        playerName={players[card.playerId].name}
                     />
                 ) : null
             )}

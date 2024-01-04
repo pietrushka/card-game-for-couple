@@ -23,6 +23,7 @@ interface CardProps {
     activeIndexRef: SharedValue<number>;
     onResponse: (a: boolean) => void;
     maxCardsVisible: number
+    playerName: string
 };
 
 export default function Card({
@@ -31,7 +32,8 @@ export default function Card({
     cardIndex,
     activeIndexRef,
     onResponse,
-    maxCardsVisible
+    maxCardsVisible,
+    playerName
 }: CardProps) {
     const translationX = useSharedValue(0);
 
@@ -110,7 +112,7 @@ export default function Card({
                 ]}
             >
                 <Text style={styles.cardText}>
-                    <Text style={styles.playerName}>Player name</Text> {toLowerCaseFirstLetter(text)}
+                    <Text style={styles.playerName}>{playerName}</Text> {toLowerCaseFirstLetter(text)}
                 </Text>
             </Animated.View>
         </GestureDetector>
