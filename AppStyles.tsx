@@ -8,7 +8,7 @@ export default StyleSheet.create({
 	},
 	header: {
 		textAlign: 'center',
-		fontSize: 20,
+		fontSize: 24,
 		fontWeight: '500'
 	},
 

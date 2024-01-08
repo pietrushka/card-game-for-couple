@@ -10,6 +10,8 @@ export type Category = {
 	id: string
 	label: string
 	isSelected: boolean
+	primaryColor: string
+	secondaryColor: string
 }
 
 export type Question = {
